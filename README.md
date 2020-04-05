@@ -13,6 +13,6 @@ GraphQL server for series querying built with [new prisma 2](https://www.prisma.
 
 ## Deploy to Zeit now
 
-1. Log in **Zeit** platform by CLi -> `now login`
+1. Log in **Zeit** platform with **now CLI** -> `now login`
 2. Add **environment variable** to now -> `now secrets add db_url "$DATABASE_URL"`
 3. Deploy -> `now`
