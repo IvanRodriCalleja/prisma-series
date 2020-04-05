@@ -1,0 +1,94 @@
+datasource db {
+    provider = "postgresql"
+    url = "***"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+// model Post {
+//   id        Int      @default(autoincrement()) @id
+//   createdAt DateTime @default(now())
+//   title     String
+//   content   String?
+//   published Boolean  @default(false)
+//   author    User     @relation(fields: [authorId], references: [id])
+//   authorId  Int         @@index([authorId], name: "authorId")
+// }
+
+// model Profile {
+//   id   Int      @default(autoincrement()) @id
+//   bio  String?
+//   user User     @relation(fields: [userId], references: [id])
+//   userId Int    @unique
+// }
+
+// model User {
+//   id      Int      @default(autoincrement()) @id
+//   email   String   @unique
+//   name    String?
+//   Post    Post[]
+//   Profile Profile?
+// }
+
+
+model Serie {
+    id              Int             @id @default(autoincrement())
+    title           String
+    language        String
+    createdAt       DateTime        @default(now())
+    updatedAt       DateTime        @updatedAt
+    image           Image  
+    actors          Actor[]
+    seasons         Season[]
+}
+
+model Actor {
+    id              Int             @id @default(autoincrement())
+    name            String
+    image           Image 
+    serie           Serie           @relation(fields: [serieId], references: [id])
+    serieId         Int             @@index([serieId])
+    character       Character
+}
+
+model Image {
+    id              Int             @id @default(autoincrement())
+    createdAt       DateTime        @default(now())
+    updatedAt       DateTime        @updatedAt
+    medium          String
+    original        String
+    serie           Serie?          @relation(fields: [serieId], references: [id])
+    serieId         Int?            @@index([serieId])
+    actor           Actor?          @relation(fields: [actorId], references: [id])
+    actorId         Int?            @@index([actorId])
+    character       Character?      @relation(fields: [characterId], references: [id])
+    characterId     Int?            @@index([characterId])
+    episode         Episode?        @relation(fields: [episodeId], references: [id])
+    episodeId       Int?            @@index([episodeId])
+}
+
+model Character {
+    id              Int             @id @default(autoincrement())
+    name            String
+    image           Image
+    actor           Actor           @relation(fields: [actorId], references: [id])
+    actorId         Int             @@index([actorId])
+}
+
+model Season {
+    id              Int             @id @default(autoincrement())
+    seasonNumber    Int
+    serie           Serie           @relation(fields: [serieId], references: [id])
+    serieId         Int             @@index([serieId])
+    episodes        Episode[]
+}
+
+model Episode {
+    id              Int             @id @default(autoincrement())
+    title           String
+    image           Image
+    season          Season          @relation(fields: [seasonId], references: [id])
+    seasonId        Int             @@index([seasonId])
+}

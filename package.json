@@ -1,0 +1,23 @@
+{
+  "name": "prisma-series",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node server",
+    "seed": "node prisma/seed",
+    "migrate:save": "prisma migrate save --experimental",
+    "migrate:up": "prisma migrate up --experimental",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@nexus/schema": "^0.13.1",
+    "@prisma/client": "^2.0.0-beta.1",
+    "graphql": "^14.5.8",
+    "graphql-yoga": "^1.16.1",
+    "nexus-prisma": "^0.12.0",
+    "nexus": "next"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.0.0-beta.1",
+    "now": "16.7.3"
+  }
+}

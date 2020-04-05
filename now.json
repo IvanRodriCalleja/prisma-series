@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "env": {
+    "DATABASE_URL": "@db_url"
+  },
+  "build": {
+    "env": {
+      "DATABASE_URL": "@db_url"
+    }
+  },
+  "builds": [
+    {
+      "src": "server/index.js",
+      "use": "@now/node"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/playground"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/graphql",
+      "destination": "/server/index.js"
+    },
+    {
+      "source": "/playground",
+      "destination": "/server/index.js"
+    }
+  ]
+}
